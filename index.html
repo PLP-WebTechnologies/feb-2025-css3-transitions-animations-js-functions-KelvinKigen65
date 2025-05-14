@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Page</title>
+    <style>
+        /* Define animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            animation: fadeIn 2s ease-in;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Interactive Animation</h2>
+    <button id="animateBtn">Animate Me</button>
+    <img src="image.jpg" id="imageElement" alt="Example Image">
+
+    <script>
+        // Save user preference
+        function savePreference(animationType) {
+            localStorage.setItem("preferredAnimation", animationType);
+        }
+
+        // Retrieve and apply animation preference
+        function applyAnimation() {
+            const animationType = localStorage.getItem("preferredAnimation");
+            const button = document.getElementById("animateBtn");
+
+            if (animationType === "pulse") {
+                button.style.animation = "pulse 0.5s ease-in-out";
+            }
+        }
+
+        // Event listener to trigger animation
+        document.getElementById("animateBtn").addEventListener("click", () => {
+            savePreference("pulse");
+            applyAnimation();
+        });
+
+        // Apply animation on page load if preference exists
+        applyAnimation();
+    </script>
+
+</body>
+</html>
